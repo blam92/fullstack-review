@@ -17,11 +17,12 @@ class App extends React.Component {
     console.log(`${term} was searched`);
     // TODO
     $.ajax({
-      url: 'http://127.0.0.1:1128',
-      dataType: 'json',
+      type: 'POST',
+      url: 'http://127.0.0.1:1128/repos',
+      contentType: 'application/json',
       error: (err) => console.log('ERROR', err),
-      success: () => console.log('REPO WAS POSTED'),
-      data: term
+      success: (response) => console.log('REPO WAS POSTED', response),
+      data: JSON.stringify({'term': term})
     });
   }
 
