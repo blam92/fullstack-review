@@ -7,14 +7,13 @@ import eye from './eye.png';
 
 let RepoItem = (props) => {
 
-  console.log(props);
   return (
     <div className="repo-item-container">
       <div className="image-section">
         <img className="avatar" src={props.repoData.owner.avatar_url} alt="img"/>
       </div>
       <div className="repo-info">
-        <h5><a target="_blank" href={props.repoData.html_url}>{props.repoData.name}</a></h5>
+        <h3><a target="_blank" href={props.repoData.html_url}>{props.repoData.name}</a></h3>
         <p><i>{props.repoData.owner.login}</i></p>
         <p>{props.repoData.description}</p>
       </div>
