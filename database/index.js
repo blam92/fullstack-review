@@ -41,12 +41,16 @@ let save = (repositories, callback) => {
       }
 }
 
-// mongoose.connection.once('open', () => {
-//   Repo.find((err, repos) => {
-//     if(err) return console.log(err);
+let getRepos = (callback) => {
+  Repo.find((err, repos) => {
+    if(err) return console.log(err);
+    console.log(repos);
+    callback(repos);
+  });
+}
 
-//     console.log(repos);
-//   });
-// });
+
+
 
 module.exports.save = save;
+module.exports.getRepos = getRepos;

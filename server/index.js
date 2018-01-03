@@ -10,7 +10,6 @@ let JSONParser = bodyParser.json();
 
 app.post('/repos', JSONParser, function (req, res) {
 
-  console.log('req body', req.body);
   if(!req.body.term) {
     res.statusCode = 500;
     res.end('500. No search term found.')
@@ -23,16 +22,24 @@ app.post('/repos', JSONParser, function (req, res) {
       });
     });
   }
-
-  // TODO - your code here!
-  // This route should take the github username provided
-  // and get the repo information from the github API, then
-  // save the repo information in the database
 });
 
 app.get('/repos', function (req, res) {
   // TODO - your code here!
   // This route should send back the top 25 repos
+  mongoDB.getRepos((repos) => {
+    let topRepos = repos.sort((a,b) => {
+      if(a.forks > b.forks) {
+        return -1;
+      }
+      if(b.forks > a.forks) {
+        return 1;
+      }
+      return 0;
+    }).slice(0, 25);
+    res.statusCode = 200;
+    res.end(JSON.stringify(topRepos));
+  });
 });
 
 let port = 1128;

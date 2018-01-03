@@ -13,6 +13,14 @@ class App extends React.Component {
 
   }
 
+  componentDidMount() {
+    $.get('http://127.0.0.1:1128/repos', (data, status) => {
+      this.setState({
+        repos: JSON.parse(data)
+      });
+    });
+  }
+
   search (term) {
     console.log(`${term} was searched`);
     // TODO

@@ -1,0 +1,19 @@
+.repo-item-container {
+  display: grid;
+  grid-template-columns: "60px 1fr 1fr";
+  grid-template-rows: 1fr;
+  grid-template-areas: "avatar description icons";
+}
+
+.avatar {
+  width: 40px;
+  grid-area: avatar;
+}
+
+.repo-info {
+  grid-area: description;
+}
+
+.icons {
+  grid-area: icons;
+}
