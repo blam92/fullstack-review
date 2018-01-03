@@ -1,13 +1,21 @@
 .repo-item-container {
   display: grid;
-  grid-template-columns: "60px 1fr 1fr";
+  width: 70%;
+  grid-template-columns: 160px 300px 1fr;
   grid-template-rows: 1fr;
-  grid-template-areas: "avatar description icons";
+  grid-template-areas: "image description icons";
+
+  margin: 10px 5%;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.image-section {
+  grid-area: image
 }
 
 .avatar {
-  width: 40px;
-  grid-area: avatar;
+  width: 150px;
 }
 
 .repo-info {
@@ -16,4 +24,26 @@
 
 .icons {
   grid-area: icons;
+}
+
+
+.icon-button {
+  width: 20%;
+  margin: 5px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 5px;
+  
+}
+
+.icon {
+  float: 0 0 50%;
+  width:30px;
+  margin-right: 3px;
+}
+
+.icon-button > span {
+  float: 0 0 50%;
 }

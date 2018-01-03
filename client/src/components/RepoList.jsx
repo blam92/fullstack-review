@@ -4,7 +4,7 @@ import RepoItem from './RepoItem.jsx';
 const RepoList = (props) => {
   
   let repos = props.repos.map((repo) => {
-    return <RepoItem/>;
+    return <RepoItem repoData={repo} />;
   });
 
   return (<div>

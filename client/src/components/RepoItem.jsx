@@ -1,21 +1,26 @@
 import React from 'react';
 import './component.css';
+import Icon from './Icon.jsx';
+
+import fork from './fork.png';
+import eye from './eye.png';
 
 let RepoItem = (props) => {
 
-
+  console.log(props);
   return (
     <div className="repo-item-container">
-      <img className="avatar" src="" alt="img"/>
+      <div className="image-section">
+        <img className="avatar" src={props.repoData.owner.avatar_url} alt="img"/>
+      </div>
       <div className="repo-info">
-        <h5>Repo Name</h5>
-        <p><i>Author</i></p>
-        <p>Repo Description</p>
+        <h5><a target="_blank" href={props.repoData.html_url}>{props.repoData.name}</a></h5>
+        <p><i>{props.repoData.owner.login}</i></p>
+        <p>{props.repoData.description}</p>
       </div>
       <div className="icons">
-        <p>ICON</p>
-        <p>ICON2</p>
-        <p>ICON3</p>
+        <Icon image={fork} text={props.repoData.forks}/>
+        <Icon image={eye} text={props.repoData.watchers}/>
       </div>
     </div>
   );
