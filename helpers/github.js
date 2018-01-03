@@ -18,9 +18,24 @@ let getReposByUsername = (username, callback) => {
     if(err) throw err;
     
     var data = JSON.parse(body);
-    callback(data);
+
+    let gitObj = data.map((repo) => {
+      return {
+        "id": repo.id,
+        "name": repo.name,
+        "description": repo.description,
+        "html_url": repo.html_url,
+        "updated_at": repo.updated_at,
+        "forks": repo.forks,
+        "watchers": repo.watchers,
+        "owner": {
+          "login": repo.owner.login,
+          "avatar_url": repo.owner.avatar_url
+        }
+      }
+    });
+    callback(gitObj);
   });
 }
-getReposByUsername('blam92');
 
 module.exports.getReposByUsername = getReposByUsername;

@@ -1,6 +1,8 @@
 const express = require('express');
 let app = express();
 let bodyParser = require('body-parser');
+let github = require('../helpers/github');
+let mongoDB = require('../database/index');
 
 app.use(express.static(__dirname + '/../client/dist'));
 
@@ -9,8 +11,18 @@ let JSONParser = bodyParser.json();
 app.post('/repos', JSONParser, function (req, res) {
 
   console.log('req body', req.body);
-  res.statusCode = 201;
-  res.send('worked');
+  if(!req.body.term) {
+    res.statusCode = 500;
+    res.end('500. No search term found.')
+  } else {
+    github.getReposByUsername(req.body.term, (repos) => {
+      // console.log(repos);
+      mongoDB.save(repos, () => {
+        res.statusCode = 201;
+        res.end('POST SUCCESSFUL');
+      });
+    });
+  }
 
   // TODO - your code here!
   // This route should take the github username provided
