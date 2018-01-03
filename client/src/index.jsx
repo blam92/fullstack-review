@@ -10,15 +10,18 @@ class App extends React.Component {
     this.state = { 
       repos: []
     }
-
+    this.getData = this.getData.bind(this);
   }
-
-  componentDidMount() {
+  getData() {
     $.get('http://127.0.0.1:1128/repos', (data, status) => {
       this.setState({
         repos: JSON.parse(data)
       });
     });
+  }
+
+  componentDidMount() {
+    this.getData();
   }
 
   search (term) {
@@ -29,7 +32,7 @@ class App extends React.Component {
       url: 'http://127.0.0.1:1128/repos',
       contentType: 'application/json',
       error: (err) => console.log('ERROR', err),
-      success: (response) => console.log('REPO WAS POSTED', response),
+      success: this.getData,
       data: JSON.stringify({'term': term})
     });
   }
